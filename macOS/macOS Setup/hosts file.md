@@ -64,13 +64,11 @@ ff02::3		ip6-allhosts
 ---
 
 Download block list apple and google hosts:
-
 ```sh
 curl -O https://raw.githubusercontent.com/l1k/osxparanoia/master/hosts
 ```
 
-Editing hosts file
-
+Editing hosts file:
 ```sh
 sudo nano /private/etc/hosts
 ```
