@@ -224,6 +224,9 @@ If you initialized a new repository using `git init` and want to add a remote UR
    ```bash
    git remote add origin git@github.com:username/repo.git
    ```
+**Note:** If you have added a README.md, .gitignore, LICENSE, etc. you will need to fetch these from the remote and merge them with your local changes. 
+Pull with Merge: `git pull origin main`
+
 
 ---
 ### Signing Commits

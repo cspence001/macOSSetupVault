@@ -159,10 +159,11 @@
       "markdown-importer:Open format converter": false
     }
   },
-  "active": "750498c0f71c8701",
+  "active": "c3d27f0ff0080145",
   "lastOpenFiles": [
-    "Untitled.md",
+    "Programming Setup/git/Atlassian-Git-Cheatsheet.pdf",
     "Programming Setup/git/git - config, gpg, and ssh key setup.md",
+    "Untitled.md",
     "Programming Setup/git/git - multiple identity management, vscode config.md",
     "Programming Setup/git/git - Pull Requests.md",
     "Programming Setup/git/git - local directory, worktrees.md",
@@ -182,7 +183,6 @@
     "Programming Setup/git/img",
     "Screenshot 2024-10-10 at 22.28.21.png",
     "Application Setup/Brave/Custom Search.md",
-    "Programming Setup/git/Atlassian-Git-Cheatsheet.pdf",
     "Programming Setup/git/example - gitconfig, ssh config, gitignore.md",
     "macOS/Security/Web Pen Testing.md",
     "macOS/Security/SSL TLS Research.md",
@@ -190,7 +190,6 @@
     "macOS/Forensics/Steganography.md",
     "macOS/Forensics/Investigating Process Invocation on macOS.md",
     "macOS/Forensics/Application Bundles + Restrictions.md",
-    "2024-09-28.md",
     "macOS/appblock.py",
     "appblock.py",
     "macOS/Security",
