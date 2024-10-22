@@ -10,11 +10,13 @@
 5. [[#Signing Commits]]
 	[[#GPG Configuration]]
 	[[#Signing Commits using SSH Keys]]
-	[[#GPG/SSH Commit Signing with Multiple Accounts]]]]
+	[[#GPG/SSH Commit Signing with Multiple Accounts]]
 6. [[#Managing Git Repositories]]
+	1. [[#Removing Files from Git Repository]]
+	2. [[#.gitignore]]
 7. [[#Resolve Divergent Branches]]
-8. [[#Advanced Git Topics]]
-9. [[#Environment Variables (Debug)]]
+8. [[#Git Environment Variables (Debug)]]
+9. [[#Advanced Git Topics]]
 10. [[#Advanced SSH Topics]]
 
 ---
@@ -61,7 +63,6 @@ Test your SSH connection to GitHub directly:
   ssh -T git@github.com
 ```
 
-
 - **Removing Keys from SSH Agent**
   - Start SSH Agent: `$ eval "$(ssh-agent -s)"
   - Delete All Identities: `%ssh-add -D`
@@ -80,7 +81,7 @@ SSH into `git@ssh.github.com` over port 443,
 override your SSH settings to force any connection to GitHub.com to run through that server and port.
 
 - **SSH Configuration File (`~/.ssh/config`)**
-- **Note:** This is your local (user) ssh config. Not the same as your `/etc/ssh` config for system client/server configuration. Create if this doesn't exist to use ssh with git. 
+- **Note:** This is your local (user) ssh config. Not the same as your `/etc/ssh` config for system client/server configuration. Create file if it doesn't exist to use ssh with git. See [[#Ensure Correct User / Local (`~/.ssh`) permissions]]
   ```plaintext
   Host github.com
     Hostname ssh.github.com
@@ -103,16 +104,6 @@ override your SSH settings to force any connection to GitHub.com to run through 
 - **Test GitHub SSH Connection**
   - `%ssh -T git@github.com`
   - Alternate Port 443: `%ssh -T -p 443 git@ssh.github.com`
-  
-#### Git Configuration Tweaks
-
-- **Configuring URL InsteadOf**
-  - [Git URL Configuration](https://gist.github.com/Kovrinic/ea5e7123ab5c97d451804ea222ecd78a)
-  - Commands:
-- This rewrite would redirect HTTPS URLs to use SSH.
-    ```bash
-git config --global url."git@github.com/".insteadOf "https://github.com/"
-    ```
 
 ##### Cloning via SSH on Port 443 Without URL Rewrites / Default SSH (Port 22)
 
@@ -126,14 +117,49 @@ git config --global url."git@github.com/".insteadOf "https://github.com/"
     ```
   
 - **Using SSH Over HTTPS Port**:
-  - To clone a specific repository using SSH over port 443, use the following command:
+  - To clone a specific repository using SSH over port 443 (if not specified in `~/.ssh/config`), use the following command:
     ```sh
     git clone ssh://git@github.com:443/cspence001/mapapp_cloudfrontS3_tests.git
     ```
   - Refer to the GitHub documentation for more details on [Using SSH Over HTTPS Port](https://docs.github.com/en/authentication/troubleshooting-ssh/using-ssh-over-the-https-port).
 
----
+##### Git Configuration Tweaks (`.gitconfig`) for SSH
+- **Configuring URL InsteadOf** 
+  - [Git URL Configuration](https://gist.github.com/Kovrinic/ea5e7123ab5c97d451804ea222ecd78a)
+  - Commands:
+- This rewrite would redirect HTTPS URLs to use SSH when using git operations.
+    ```bash
+git config --global url."git@github.com/".insteadOf "https://github.com/"
+    ```
 
+##### Ensure Correct User / Local (`~/.ssh`) permissions 
+- **SSH Directory Permissions**
+  - [Permissions in `~/.ssh`](https://gist.github.com/denisgolius/d846af3ad5ce661dbca0335ec35e3d39)
+- Check Permissions: `ls -la ~/.ssh`
+- **Directory (`~/.ssh`)**:
+    - `drwx------` 
+    - `chmod 700 ~/.ssh`
+- **Private Key (`id_ed25519`)**:
+    - `-rw-------` 
+    - `chmod 600 ~/.ssh/*`
+- **Public Key (`id_ed25519.pub`)**:
+    - `-rw-r--r--` 
+    - `chmod 644 ~/.ssh/*.pub`
+- **Config File (`config`)**:
+    - `-rw-r--r--`
+    - `chmod 644 ~/.ssh/config`
+- **Known Hosts (`known_hosts`)**:
+    - `-rw-r--r--`
+    - `chmod 644 ~/.ssh/known_hosts`
+- **Old Known Hosts (`known_hosts.old`)**:
+    - `-rw-r--r--` 
+    - `chmod 644 ~/.ssh/known_hosts`
+- **Special Files (`authorized_keys`)**
+	- `-rw-r--r--`
+	- `chmod 644 ~/.ssh/authorized_keys`
+
+
+---
 ### Git Configuration
 
 **List Git Configurations**
@@ -227,7 +253,6 @@ If you initialized a new repository using `git init` and want to add a remote UR
 **Note:** If you have added a `README.md`, `.gitignore`, `LICENSE`, etc. you will need to fetch these from the remote and merge them with your local changes. 
 Pull with Merge: `git pull --rebase origin main`
 
-
 ---
 ### Signing Commits
 [Signing Commits - Github Documentation](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits)
@@ -315,12 +340,8 @@ git config --global user.signingkey /PATH/TO/.SSH/KEY.PUB
 
 * [git guide](https://github.com/git-guides) Git, from getting started to advanced commands and workflows.
 * [[Atlassian-Git-Cheatsheet.pdf]]
-##### clearing sensitive data from Git history:
-- Use tools like [`BFG Repo-Cleaner`](https://github.com/rtyley/bfg-repo-cleaner) or [`git-filter-repo`](https://github.com/newren/git-filter-repo) to scan and remove sensitive data from the repository’s history.
-- Employ the `git rm` command to remove the sensitive file and make a commit, followed by using `git filter-branch` or `git filter-repo` to erase it from the Git history.
-[git + cyber security](https://www.gitwiki.org/git-and-cyber-security/)
 
-- **Removing Files from Git Repository**
+##### Removing Files from Git Repository
   - Remove `.vscode` files from Git Repo (recursive, doesn't remove locally): 
 ```sh
   git rm -r --cached .vscode 
@@ -333,6 +354,11 @@ find . -name .DS_Store -print0 | xargs -0 git rm -f --ignore-unmatch
 git add .
 git commit -m '.DS_Store banished!'
 ```
+
+**Clearing sensitive data from Git history:**
+- Use tools like [`BFG Repo-Cleaner`](https://github.com/rtyley/bfg-repo-cleaner) or [`git-filter-repo`](https://github.com/newren/git-filter-repo) to scan and remove sensitive data from the repository’s history.
+- Employ the `git rm` command to remove the sensitive file and make a commit, followed by using `git filter-branch` or `git filter-repo` to erase it from the Git history.
+[git + cyber security](https://www.gitwiki.org/git-and-cyber-security/)
 ##### .gitignore
 - **Global Exclusion List**
   - Specify Exclusion File: `git config --global core.excludesfile ~/.gitignore`
@@ -412,6 +438,19 @@ git commit -m '.DS_Store banished!'
 
 ---
 
+### Git Environment Variables (Debug)
+
+- **`GIT_SSH_COMMAND`**: Customizes the SSH command used by Git, useful for debugging SSH connections.
+  ```sh
+  GIT_SSH_COMMAND="ssh -v" git clone git@github.com:cspence001/hindsight.git
+  ```
+
+- **`GIT_CURL_VERBOSE`**: Enables detailed HTTP(S) request/response logging for Git operations, useful for troubleshooting HTTP(S) connections.
+  ```sh
+  GIT_CURL_VERBOSE=1 git clone https://github.com/cspence001/hindsight.git
+  ```
+
+---
 ### Advanced Git Topics
 
 * **Official Docs**
@@ -438,33 +477,9 @@ git commit -m '.DS_Store banished!'
 
 ---
 
-### Environment Variables (Debug)
-
-- **`GIT_SSH_COMMAND`**: Customizes the SSH command used by Git, useful for debugging SSH connections.
-  ```sh
-  GIT_SSH_COMMAND="ssh -v" git clone git@github.com:cspence001/hindsight.git
-  ```
-
-- **`GIT_CURL_VERBOSE`**: Enables detailed HTTP(S) request/response logging for Git operations, useful for troubleshooting HTTP(S) connections.
-  ```sh
-  GIT_CURL_VERBOSE=1 git clone https://github.com/cspence001/hindsight.git
-  ```
-
----
-
 ### Advanced SSH Topics
 
-##### User / Local SSH config Permissions (directory used by .gitconfig)
-
-- **SSH Directory Permissions**
-  - [Permissions in `~/.ssh`](https://gist.github.com/denisgolius/d846af3ad5ce661dbca0335ec35e3d39)
-  - Fix Permissions:
-    - Directory: `chmod 700 ~/.ssh`
-    - Keys: `chmod 600 ~/.ssh/*`
-    - Public Keys: `chmod 644 ~/.ssh/*.pub`
-    - Special Files: `chmod 644 ~/.ssh/authorized_keys`, `chmod 644 ~/.ssh/known_hosts`, `chmod 644 ~/.ssh/config`
-    
-
+---
 ##### Global (macOS) Server / Client SSH 
 [drduh/macOS-Security-and-Privacy-Guide - SSH](https://github.com/drduh/macOS-Security-and-Privacy-Guide?tab=readme-ov-file#ssh)
 

@@ -70,23 +70,24 @@
   ```bash
   dscl . -list /Groups GroupMembership
   ```
-
 - Read specific group membership:
   ```bash
   dscl . -read /Groups/mygroup GroupMembership
   ```
+* Check membership for `staff`
+```sh
+  dscl . -read /Groups/staff GroupMembership
+```
 
 ### Modifying Membership
 - Remove user from a group:
   ```bash
   dscl . -delete /Groups/<group> GroupMembership "name"
   ```
-
 - Add user to a new group:
   ```bash
   dscl . -create /Groups/brew GroupMembership "name"
   ```
-
 - Append user to the admin group:
   ```bash
   dscl . -append /groups/admin GroupMembership USERNAME
@@ -99,7 +100,6 @@
   ```bash
   dscl . -read /Groups/admin GroupMembership
   ```
-
 - Verify changes:
   ```bash
   dscl . -read /groups/admin GroupMembership
@@ -111,7 +111,6 @@
   ```bash
   dscl . readall /users
   ```
-
 - Read all groups:
   ```bash
   dscl . readall /groups
@@ -210,7 +209,7 @@ sudo bash -c 'for i in $(find /var/db/dslocal/nodes/Default/users -type f -regex
   ```
 
 see also man pages for `opendirectoryd(8), DirectoryServiceAttributes(7), dsenableroot(8), dserr(8)`
-## Printer Permissions Management
+### Printer Permissions Management
 
 To enable anyone to access printer preferences:
 ```bash

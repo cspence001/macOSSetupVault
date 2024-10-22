@@ -134,7 +134,7 @@ Host github-work
   User git
   AddKeysToAgent yes
   UseKeychain yes
-  IdentityFile ~/.ssh/id_ed25519_cspence001  # Personal key
+  IdentityFile ~/.ssh/id_ed25519_work  # Work key
   IdentitiesOnly yes
   UserKnownHostsFile ~/.ssh/known_hosts
 ```
@@ -257,8 +257,8 @@ git commit -S -m "Your commit message"
 1. **SSH Key Configuration**:
    - You generate separate SSH keys for each account and configure them in the `~/.ssh/config` file.
    ```bash
-   ssh-keygen -t rsa -C "yourname.personal@example.com" -f ~/.ssh/id_rsa_personal
-   ssh-keygen -t rsa -C "yourname.work@example.com" -f ~/.ssh/id_rsa_work
+ssh-keygen -t ed25519 -C "yourname.personal@example.com" -f ~/.ssh/id_ed2551_personal
+ssh-keygen -t ed25519 -C "yourname.work@example.com" -f ~/.ssh/id_ed2551_work
    ```
 
 2. **SSH Config**:
@@ -267,30 +267,30 @@ git commit -S -m "Your commit message"
    Host github-personal
        Hostname github.com
        User git
-       IdentityFile ~/.ssh/id_rsa_personal
+       IdentityFile ~/.ssh/id_ed25519_personal
 
    Host github-work
        Hostname github.com
        User git
-       IdentityFile ~/.ssh/id_rsa_work
+       IdentityFile ~/.ssh/id_ed25519_work
    ```
 
 3. **Git Configuration**:
    * Specify SSH key per config file: (Method 1: Conditional Includes in Global Config)
 ```sh
-   git config --file ~/.gitconfig-work user.signingKey ~/.ssh/id_rsa_work.pub
+git config --file ~/.gitconfig-work user.signingKey ~/.ssh/id_ed2551_work.pub
 ```
    - Specify SSH key per repo (Method 2: Set Email Per Repository) and `allowed_signers` file, if needed.
 ```bash
 # For Personal Repository
 git config user.name "Your Name Personal"
 git config user.email "yourname.personal@example.com"
-git config user.signingKey ~/.ssh/id_rsa_personal.pub
+git config user.signingKey ~/.ssh/id_ed2551_personal.pub
 
 # For Work Repository
 git config user.name "Your Name Work"
 git config user.email "yourname.work@example.com"
-git config user.signingKey ~/.ssh/id_rsa_work.pub
+git config user.signingKey ~/.ssh/id_ed2551_work.pub
 ```
 
 **Commit Signing**

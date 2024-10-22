@@ -3,6 +3,19 @@
 
 ### File and Directory Permissions
 
+#### List Permissions
+Check current permissions:
+`ls -la` e.g. `ls -la ~/.npm`
+List files with long format and show file flags:
+`ls -lO`  
+List files with long format and show extended attributes:
+`ls -l@`  
+List files with long format, show file flags and extended attributes:
+`ls -lO@` 
+List files (`-l`), flags (`-O`), xattr keys(`-@`), print acl's (`-e`) in long format, incl . dirs (`-a`):
+`ls -lOae@` 
+
+---
 #### `chmod` (Change Mode)
 
 **Purpose:**
@@ -58,10 +71,34 @@
 **Remove read access for All (Owner, Group, Others):**
 `chmod a-r <directory_name>`
 
+##### Ensuring correct User / Local (`~/.ssh`) permissions with `chmod`
+- [**~/.ssh Directory Permissions**](https://gist.github.com/denisgolius/d846af3ad5ce661dbca0335ec35e3d39)
+- Check Permissions: `ls -la ~/.ssh`
+- **Directory (`~/.ssh`)**:
+    - `drwx------` 
+    - `chmod 700 ~/.ssh`
+- **Private Key (`id_ed25519`)**:
+    - `-rw-------` 
+    - `chmod 600 ~/.ssh/*`
+- **Public Key (`id_ed25519.pub`)**:
+    - `-rw-r--r--` 
+    - `chmod 644 ~/.ssh/*.pub`
+- **Config File (`config`)**:
+    - `-rw-r--r--`
+    - `chmod 644 ~/.ssh/config`
+- **Known Hosts (`known_hosts`)**:
+    - `-rw-r--r--`
+    - `chmod 644 ~/.ssh/known_hosts`
+- **Old Known Hosts (`known_hosts.old`)**:
+    - `-rw-r--r--` 
+    - `chmod 644 ~/.ssh/known_hosts`
+- **Special Files (`authorized_keys`)**
+	- `-rw-r--r--`
+	- `chmod 644 ~/.ssh/authorized_keys`
 
 ---
 
-### `chflags` (Change Flags)
+#### `chflags` (Change Flags)
 
 **Purpose:**
 - Set or remove special file system attributes.
@@ -83,7 +120,7 @@
 
 ---
 
-### `chown` (Change Owner)
+#### `chown` (Change Owner)
 
 **Purpose:**
 - Change the owner and/or group of a file or directory.
@@ -120,9 +157,10 @@
 
 ---
 
-### Directory-Specific Permissions
+#### Directory-Specific Permissions
+##### System-level Directory permissions
 
-#### `/etc/ssh/`
+ **`/etc/ssh/`**
 
 **Permissions Setup:**
 ```sh
@@ -137,7 +175,7 @@ sudo chmod 755 /etc/ssh/sshd_config.d
 ```
 - **Resource:** [Apple Stack Exchange](https://apple.stackexchange.com/questions/431367/ssh-permissions-in-files-etc)
 
-#### `/etc/hosts`
+**`/etc/hosts`**
 
 **Locking and Protection:**
 - **Using System Immutable Flag (`schg`):**
@@ -158,69 +196,55 @@ sudo chmod 755 /etc/ssh/sshd_config.d
   - **Resource:** [Apple Stack Exchange](https://apple.stackexchange.com/a/282341)
 
 ---
+##### User-level Directory Permissions
 
-### `npm` and `vscode-oss` Directory Permissions
-
-#### `.npm`
+**`~/.npm`**
 
 **Check Current Permissions:**
 ```sh
 ls -la ~/.npm
 ```
-
 **Apply Permissions:**
 ```sh
 chmod 700 ~/.npm
 ```
-
 **Recursively Set Permissions:**
 ```sh
 chmod -R 700 ~/.npm
 ```
-
 **Set Ownership:**
 ```sh
 sudo chown -R $(whoami):$(whoami) ~/.npm
 ```
-
 **Verify Changes:**
 ```sh
 ls -la ~/.npm
 ```
 
-#### `.vscode-oss`
+
+**`~/.vscode-oss`**
 
 **Check Current Permissions:**
 ```sh
 ls -la ~/.vscode-oss
 ```
-
 **Set Correct Permissions:**
 ```sh
 chmod 755 ~/.vscode-oss
 ```
-
 **Recursively Set Permissions:**
 ```sh
 chmod -R 755 ~/.vscode-oss
 ```
-
 **Set Ownership:**
 ```sh
 sudo chown -R $(whoami):$(whoami) ~/.vscode-oss
 ```
-
 **Verify Changes:**
 ```sh
 ls -la ~/.vscode-oss
 ```
 
+
 ---
-
-###  Group + Group Membership 
-
-Check membership for `staff`
-```sh
-dscl . -read /Groups/staff GroupMembership
-```
 
