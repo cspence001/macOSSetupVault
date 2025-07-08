@@ -33,10 +33,10 @@ For home routers
 	https://real-debrid.com/
 
 * Apple TV 
-	no ads
-	ethernet 
-	speed
+	no ads, ethernet, speed
 	seamlessness - synced across apple TVs, phone as remote
+See Also: [Best way to set up a smart home](https://techinsightspot.com/best-way-to-set-up-a-smart-home/?utm_source=fing&utm_medium=email&utm_campaign=fing_htd_newsletter)
+	Amazon Alexa, Google Home, Apple HomeKit
 
 * Plex Server
 
@@ -49,3 +49,4 @@ For home routers
 		Processor - i9-13900k
 		Memory - 32GB DDR5 $100 
 		Stream PCs - MSI MPG Z790, ASUS Dual 4060ti, i9-13900k, 32GB DDR5
+

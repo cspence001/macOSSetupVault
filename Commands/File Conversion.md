@@ -62,6 +62,19 @@
   xxd [filename]
   ```
 
+e.g.
+```sh
+xxd -b /private/var/folders/vy/qdp8xcfj4s3dd5c6d1xp_y3w0000gn/C/com.apple.Safari.SafeBrowsing/Google/social_engineering\,osx\,url_expression > socialeng.txt
+```
+
+You can use `xxd` or other tools to convert the binary patterns into ASCII text:
+**Example using `xxd` (as you did earlier):**
+```sh
+xxd -r -b googsocialeng.txt | hexdump -C
+```
+- `xxd -r -b` reverses the binary back to its byte form, and `hexdump -C` will then format it into a human-readable format, showing both the hex and ASCII equivalent.
+If any text is encoded in ASCII, it should appear when you use this method.
+
 - **Extracts printable strings from a binary file.**  
   ```bash
   strings [filename]

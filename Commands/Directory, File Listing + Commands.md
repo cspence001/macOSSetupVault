@@ -255,6 +255,25 @@ $ find . -type f \( -iname "*.mp4" -o -iname "*.gif" \)
 # delete
 $ find . -type f \( -iname "*.mp4" -o -iname "*.gif" \) -delete
 ```
+
+**Find Files by Owner**
+See [[Users and Groups Management on macOS]]
+Search for files and directories owned by a specific group:
+```bash
+find /path/to/search -group groupname
+```
+To find all files and directories in your home directory that belong to the group `staff`:
+```bash
+find ~ -group staff
+```
+To Search Recursively from the Root Directory:
+```bash
+sudo find / -group groupname
+```
+To see more details about the files found (like permissions and ownership), you can pipe the output to `ls`:
+```bash
+find /path/to/search -group groupname -exec ls -l {} \;
+```
 #### `mdfind` and `mfind`
 
   - **Search for files containing the word 'password':**
@@ -419,6 +438,18 @@ rm -rf ripgrep-<version>-x86_64-apple-darwin/
 - Copy a given file or directory, while retaining the original file permissions:
 
 `ditto -rsrc path/to/source_directory path/to/destination_directory`
+
+#### `rsync`
+
+- Synchronizing files and directories between two locations
+`caffeinate -i rsync -av --times --progress "~/source-folder" "/Volumes/MY-SSD/target-folder/`
+	- `-a`: Archive mode, which preserves permissions, timestamps, symbolic links, and other file attributes.
+	- `-v`: Verbose mode, which provides detailed output of the transfer process.
+	- `--times`: Preserves modification times of the files.
+	- `--progress`: Shows the progress of the file transfer.
+
+`caffeinate` command is used to prevent the system from sleeping.
+`-i` option specifically prevents the system from idle sleeping while the command runs.
 
 ---
 ## File Downloading

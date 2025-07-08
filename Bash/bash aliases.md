@@ -28,6 +28,7 @@ alias ep="export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bi
 # --- Power Management ---
 ```bash
 alias caff="caffeinate -i -w"   # Prevents the system from sleeping while a process is running.
+alias caff2="caffeinate -i rsync -av --times --progress "~/source-folder" "/Volumes/MY-SSD/target-folder/"
 ```
 # --- Google Cloud SDK ---
 ```bash

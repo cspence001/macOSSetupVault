@@ -155,6 +155,13 @@ List files (`-l`), flags (`-O`), xattr keys(`-@`), print acl's (`-e`) in long fo
    sudo chown -R $(whoami):$(id -gn) ~/.npm
    ```
 
+#### `chgrp` (Change Group)
+
+Change group ownership:
+```bash
+sudo chgrp groupname /path/to/file
+```
+
 ---
 
 #### Directory-Specific Permissions

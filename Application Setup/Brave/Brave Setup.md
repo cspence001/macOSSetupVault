@@ -9,12 +9,12 @@ Delete browsing data > On exit
 	Cookies and other site data
 	Cached Images and files
 
-Security
+**Security**
 	Standard Protection
 	Use Secure DNS
 	Select DNS Provider > OS default
 	
-Site and Shields Settings
+**Site and Shields Settings**
 	Content >
 		Block Cookies > Block 3rd Party Cookies
 		Pop-ups and redirects > Don't allow sites to send pop-ups or use redirects
@@ -24,13 +24,12 @@ Site and Shields Settings
 
 **Privacy and Security** > **WebRTC IP handling policy > Disable non-proxied UDP**
 - **WebRTC IP Handling Policy:**
-  - **Disable Non-Proxied UDP**: Ensure WebRTC uses TCP to contact peers or servers unless the proxy server supports UDP. This setting prevents exposing local addresses.
   - **WebRTC Overview**: WebRTC allows for direct connections for features like video chat, which can reveal your IP address. Brave provides settings to manage this but typically, default settings are sufficient.
   - **Policies:**
     - **Default**: WebRTC can enumerate and bind all interfaces, discovering public interfaces.
     - **Default Public And Private Interfaces**: WebRTC uses the default HTTP route, exposing the default private address.
     - **Default Public Interface Only**: WebRTC uses only the default HTTP route, avoiding exposure of local addresses.
-    - **Disable Non-Proxied UDP**: WebRTC uses only TCP unless the proxy supports UDP, hiding local addresses.
+    - **Disable Non-Proxied UDP**: Ensure WebRTC uses TCP to contact peers or servers unless the proxy server supports UDP. This setting prevents exposing local addresses.
 Use Google services for push messaging (Disabled)
 Auto-redirect AMP pages (Enabled)
 Auto-redirect tracking URLs (Enabled)
@@ -75,7 +74,7 @@ brave://flags
 #### Flags and Experimental Features
 - **Enable Localhost Access Permission Prompt**: Enabled. Displays a prompt for permission when a site tries to connect to localhost (127.0.0.1).
 - **Local Data Collection for Notification Ad Timing (brave-federated)**: Disabled.
-- **Anonymize Local IPs Exposed by WebRTC**: Enabled. Conceals local IPs with mDNS hostnames across multiple platforms.
+- **Anonymize Local IPs Exposed by WebRTC**: (Default Enabled). Conceals local IPs with mDNS hostnames across multiple platforms.
 - **Allow Invalid Certificates for Resources Loaded from Localhost**: Disabled.
 - **WebTransport Developer Mode**: Disabled.
 - **Enable SpeedReader**: Enabled.

@@ -31,18 +31,6 @@ https://github.com/nguyenvanduocit/obsidian-open-gate
 https://github.com/Vinzent03/obsidian-git
 
 
-##### Suggestions
-
-Add language to dictionary
-
-Tier Price Options for Sync / Publish
-	Sync - # of devices, personal/commercial/enterprise data limits 
-	Publish - personal / commercial / enterprise - data limit determination
-		https://forum.obsidian.md/t/about-pricing-aka-why-does-obsidian-service-x-cost-so-much-or-any-money-at-all/26329/46
-	like aws does for support options - 
-	personal tier-  2-4 biz days response email 
-	commercial - 24 hour response email M-F 9-5
-	enterpirsse -  24 hour response email , instant chat M-F 9-5
 
 
 

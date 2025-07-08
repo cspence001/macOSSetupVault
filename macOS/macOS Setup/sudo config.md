@@ -106,4 +106,4 @@ To enable TouchID authentication for `sudo`:
    auth sufficient pam_tid.so
    ```
    - **Note:** This configuration will break `sudo` when SSH'ing into your machine, as TouchID cannot be used remotely.
-   
+`CTL + X`, `S`

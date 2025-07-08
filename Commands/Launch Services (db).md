@@ -139,6 +139,7 @@ pbs
   ```bash
   # List installed applications and their details.
   lsappinfo list
+  lsappinfo list | grep -E 'name|bundleID|extension'
   lsappinfo processList
   lsappinfo front
   lsappinfo info `lsappinfo front`

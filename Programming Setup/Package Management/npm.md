@@ -58,13 +58,61 @@ If you want to avoid using `sudo` and don't want to change permissions, you can 
 
 ---
 
-### npm Commands and Tools
+### Initializing React Apps (Setup)
 
-#### Create a React App
+**Create React App (CRA)**
 - **Create a new React application:**
   ```sh
   npx create-react-app <project_name>
   ```
+
+**Next.js**
+Next.js is a React framework specialized in **server-side rendering (SSR)**, **static site generation (SSG)**, and hybrid applications. It provides features like file-based routing, image optimization, and is particularly suited for projects where SEO and fast initial load times are priorities.
+```bash
+npx create-next-app my-app
+cd my-app
+npm run dev
+```
+
+**Vite.js**
+https://vite.dev/guide/
+Vite.js is a build tool that supports various frameworks including React, Vue, and Svelte. It focuses on client-side rendering, offering fast development setup and hot module replacement. Vite.js is ideal for projects where rapid development and reduced server load are key considerations.
+```bash
+npm create vite@latest my-app --template react
+cd my-app
+npm install
+npm run dev
+```
+or
+```bash
+cd my-app
+npm init vite@latest . --template react
+```
+
+**Rollup**
+Rollup is a module bundler that can be configured for React projects. It provides a more manual setup but allows for more customization.
+
+**Basic setup:**
+1. Install dependencies:
+```bash
+npm init -y 
+npm install react react-dom rollup rollup-plugin-babel @babel/preset-react
+```
+2. Create a `rollup.config.js` file for your configuration.
+
+**Manual Setup with Webpack**
+If you want complete control, you can set up a React application manually using Webpack and Babel.
+
+**Basic steps:**
+1. Create a new directory and initialize npm:
+```bash
+npm init -y
+```
+2. Install dependencies:
+```bash
+npm install react react-dom webpack webpack-cli babel-loader @babel/core @babel/preset-env @babel/preset-react
+```
+3. Set up Webpack and Babel configuration files.
 
 ---
 

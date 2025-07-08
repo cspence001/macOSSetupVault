@@ -24,7 +24,7 @@
 ### Users
 - List all users:
   ```bash
-  dscl . -list /Users > folder/u.txt
+  dscl . -list /Users 
   ```
 
 - List users with their Primary Group ID:
@@ -45,13 +45,22 @@
 ### Groups
 - List all groups:
   ```bash
-  dscl . -list /Groups > folder/g.txt
+  dscl . -list /Groups 
   ```
 
 - List groups with their Primary Group ID, sorted numerically:
   ```bash
   dscl . list /Groups PrimaryGroupID | tr -s ' ' | sort -n -t ' ' -k2,2
   ```
+ 
+  * List groups containing a specific user:
+```bash
+for group in $(dscl . -list /Groups | awk '{print $1}'); do
+    if dscl . -read /Groups/$group | grep -q "GroupMembership: username"; then
+        echo "$group"
+    fi
+done
+```
 
 - Check group cache:
   ```bash

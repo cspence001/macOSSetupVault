@@ -368,7 +368,7 @@ git commit -m '.DS_Store banished!'
     echo .DS_Store >> ~/.gitignore
     ```
 
-* Example .gitignore [[example - gitconfig, ssh config, gitignore]]
+* Example .gitignore [[example - gitconfig, ssh config, gitignore#.gitignore example]]
 * [Stackoverflow - Git Ignore Global List, .DS_Store](https://stackoverflow.com/questions/107701/how-can-i-remove-ds-store-files-from-a-git-repository)
 
 ---
