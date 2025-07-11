@@ -81,6 +81,72 @@ find /path/to/directory -type f ! -name "*.png" ! -name "*.img" ! -name ".*"
 find ReactCodeVault -type f ! -name ".*" ! -path "*/.*" -print
 ```
 
+##### You can limit the depth and include dotfiles using the `-maxdepth` option with `find`. 
+
+**To go only 2 levels deep and include dotfiles:**
+```bash
+find . -maxdepth 2 -type f > /Users/meuthu/folder/repos/mapapp_cloudfront_streaming/dirfiles.txt
+```
+
+**If you want to exclude certain deep hidden directories but keep dotfiles:**
+```bash
+find . -maxdepth 3 -type f -not -path "*/node_modules/*" -not -path "*/.git/*" > /Users/meuthu/folder/repos/mapapp_cloudfront_streaming/dirfiles.txt
+```
+
+**To be more specific about dotfiles (only include dotfiles in the current directory):**
+```bash
+find . -maxdepth 1 -type f -name ".*" > /Users/meuthu/folder/repos/mapapp_cloudfront_streaming/dirfiles.txt
+find . -maxdepth 2 -type f -not -name ".*" >> /Users/meuthu/folder/repos/mapapp_cloudfront_streaming/dirfiles.txt
+```
+
+----
+
+Looking at your directory structure, here's the `rsync` command tailored for your Python Flask project:
+
+```bash
+rsync -avh --progress \
+    --exclude='.git' \
+    --exclude='.venv' \
+    --exclude='__pycache__' \
+    --exclude='*.pyc' \
+    --exclude='.env' \
+    --exclude='*.log' \
+    --exclude='.DS_Store' \
+    --exclude='dirfiles.txt' \
+    ~/folder/repos/mapapp_cloudfront_streaming/ \
+    ~/folder/repos/mapapp_refactor/
+```
+
+**What this excludes based on your structure:**
+
+- `.git/` → All Git history and objects
+- `.venv/` → Your virtual environment (you'll recreate this)
+- `__pycache__/` → Python bytecode cache directories
+- `*.pyc` → Compiled Python files
+- `.env` → Environment variables (if you have any)
+- `*.log` → Log files
+- `.DS_Store` → Mac filesystem metadata
+- `dirfiles.txt` → Your file listing (seems temporary)
+
+**What this KEEPS:**
+- `requirements.txt` ✓
+- `Pipfile` ✓
+- `LICENSE` ✓
+- `README.md` ✓
+- `.gitignore` ✓ (you want this in your new repo)
+- All your source code in `./map/` ✓
+
+After copying, you'll need to:
+
+```bash
+cd ~/folder/repos/mapapp_refactor
+python -m venv .venv
+source .venv/bin/activate  # or .venv/Scripts/activate on Windows
+pip install -r requirements.txt
+```
+
+
+---
 
 ### Mapping and Aliases
 
@@ -97,7 +163,7 @@ find ReactCodeVault -type f ! -name ".*" ! -path "*/.*" -print
 
 ---
 
-## Directory Size
+### Directory Size
 
 - **Basic Size of a Directory:**
   ```bash
@@ -149,7 +215,7 @@ To count all empty files (files that are exactly 0 bytes) in a directory and its
 
 ---
 
-## Difference Between 2 Files
+### Difference Between 2 Files
 
 - **`comm` - Compare two sorted files line by line:**
   ```sh
@@ -172,7 +238,7 @@ To count all empty files (files that are exactly 0 bytes) in a directory and its
 
 ---
 
-## Difference Between 2 Directories
+### Difference Between 2 Directories
 
 - **Brief output (just note differences):**
   ```sh
@@ -207,7 +273,7 @@ To count all empty files (files that are exactly 0 bytes) in a directory and its
   ```
 
 ---
-## File Searching
+### File Searching
 
 #### `find` Commands
 
@@ -422,7 +488,7 @@ rm -rf ripgrep-<version>-x86_64-apple-darwin/
 ```
 
 ---
-## File Copying
+### File Copying
 #### `ditto`
 
 > Copy files and directories. More information: [https://keith.github.io/xcode-man-pages/ditto.1.html](https://keith.github.io/xcode-man-pages/ditto.1.html).
@@ -452,7 +518,7 @@ rm -rf ripgrep-<version>-x86_64-apple-darwin/
 `-i` option specifically prevents the system from idle sleeping while the command runs.
 
 ---
-## File Downloading
+### File Downloading
 
 - **Downloads a file from the URL and saves it to `~/Downloads` with the filename extracted from the URL.**  
   ```bash
