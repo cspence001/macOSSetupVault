@@ -10,7 +10,7 @@
 [user]
 	name = cspence001
 	email = 69818722+cspence001@users.noreply.github.com
-	signingkey = E45EACFE70B7F85A
+	signingkey = [key here]
 
 [core]
 	excludesfile = /Users/meuthu/.gitignore

@@ -172,6 +172,7 @@ git config --global url."git@github.com/".insteadOf "https://github.com/"
 - Core (Read-Only): `/Library/Developer/CommandLineTools/usr/share/git-core/gitconfig`
 - Local (Repository-Specific): `% git config --local --list --show-origin`
 	- (Ensure you are within local repository directory)
+	- or `$ cat .git/config`
 
 ##### Git Global Configuration 
 **Setting Global Git Username + Email**
