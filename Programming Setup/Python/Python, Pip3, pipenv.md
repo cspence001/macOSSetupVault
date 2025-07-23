@@ -279,6 +279,59 @@ null = None
   % pip3 install -r requirements.txt
   ```
 
+
+**Check for outdated packages**
+```bash
+pip3 list --outdated
+```
+This shows all installed packages that have newer versions available, displaying current and latest versions.
+
+**Check a specific package**
+```bash
+pip3 show packagename
+```
+This shows detailed info about a specific package, including the current version. You can then check PyPI manually or use:
+```bash
+pip3 index versions packagename
+```
+This shows all available versions of a specific package.
+
+**More detailed outdated info**
+```bash
+pip3 list --outdated --format=columns
+```
+Formats the outdated packages in a cleaner table format.
+
+**Check what would be upgraded (dry run)**
+```bash
+pip3 install --upgrade --dry-run packagename
+```
+Shows what would happen if you upgraded a package without actually doing it.
+
+**Upgrade all outdated packages**
+While pip doesn't have a built-in "upgrade all" command, you can combine commands:
+```bash
+# List outdated packages and upgrade them
+pip3 list --outdated | tail -n +3 | awk '{print $1}' | xargs -n1 pip3 install --upgrade
+```
+
+Or for a safer approach, upgrade packages one by one:
+```bash
+pip3 install --upgrade package1 package2 package3
+```
+
+**Using pip-review (third-party tool)**
+Install it first:
+```bash
+pip3 install pip-review
+```
+Then use:
+```bash
+pip-review --local --interactive
+```
+This gives you an interactive way to review and selectively upgrade packages.
+
+
 ---
 
 ### `venv`
