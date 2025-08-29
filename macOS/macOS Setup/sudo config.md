@@ -107,3 +107,5 @@ To enable TouchID authentication for `sudo`:
    ```
    - **Note:** This configuration will break `sudo` when SSH'ing into your machine, as TouchID cannot be used remotely.
 `CTL + X`, `S`
+
+Cmimeokok2626!!
